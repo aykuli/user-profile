@@ -25,7 +25,8 @@ export default {
     users() {
       return this.$store.getters['users/users'];
     }
-  }
+  },
+  middleware: ['auth'] // sequence is important
 }
 // todo: linter configure
 </script>

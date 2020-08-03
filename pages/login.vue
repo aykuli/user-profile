@@ -1,5 +1,8 @@
 <template>
   <section class="page__login">
+    <v-alert type="error" v-if="$route.query.message">
+      Need login to watch content.
+    </v-alert>
     <p>Login to continue</p>
     <v-form
     @submit.prevent="onSubmit()"
