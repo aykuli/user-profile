@@ -2,6 +2,7 @@
   <section class="page__login">
     <p>Login to continue</p>
     <v-form
+    @submit.prevent="onSubmit()"
     ref="form"
     v-model="valid"
     lazy-validation
@@ -25,7 +26,7 @@
       :disabled="!valid"
       color="success"
       class="mr-4"
-      @click="validate"
+      @click="onSubmit()"
     >
       Submit
     </v-btn>
@@ -65,6 +66,10 @@ export default {
       reset () {
         this.$refs.form.reset()
       },
+      onSubmit() {
+        this.$store.dispatch('login');
+        this.$router.push('/');
+      }
     }
 }
 </script>
