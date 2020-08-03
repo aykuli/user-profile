@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>Users</h1>
-    <ul v-for="user of users" :key="user.name">
+    <ul v-for="user of users" :key="user.id">
       <li>
         <a href="#" @click.prevent="openUser(user)">{{ user.name }}</a>
       </li>
@@ -11,16 +11,21 @@
 
 <script>
 export default {
-  data: () => ({
-    users: [
-      { name: 'aynur', age: 33 },
-      { name: 'Sasha', age: 35 }
-    ]
-  }),
   methods: {
     openUser(user) {
       this.$router.push('/users/' + user.name);
     }
+  },
+  async fetch({ store }) {
+    if (store.getters['users/users'].length === 0) {
+      await store.dispatch('users/fetch');
+    }
+  },
+  computed: {
+    users() {
+      return this.$store.getters['users/users'];
+    }
   }
 }
+// todo: linter configure
 </script>

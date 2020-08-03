@@ -27,6 +27,7 @@ export default {
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
     ]
   },
+  loading: { color: 'blue' },
   /*
   ** Global CSS
   */
@@ -54,6 +55,7 @@ export default {
   ** Nuxt.js modules
   */
   modules: [
+    '@nuxtjs/axios'
   ],
   /*
   ** vuetify module configuration
