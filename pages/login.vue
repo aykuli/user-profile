@@ -1,5 +1,6 @@
 <template>
-  <section>
+  <section class="page__login">
+    <p>Login to continue</p>
     <v-form
     ref="form"
     v-model="valid"
@@ -20,28 +21,13 @@
       required
     ></v-text-field>
 
-    <v-select
-      v-model="select"
-      :items="items"
-      :rules="[v => !!v || 'Item is required']"
-      label="Item"
-      required
-    ></v-select>
-
-    <v-checkbox
-      v-model="checkbox"
-      :rules="[v => !!v || 'You must agree to continue!']"
-      label="Do you agree?"
-      required
-    ></v-checkbox>
-
     <v-btn
       :disabled="!valid"
       color="success"
       class="mr-4"
       @click="validate"
     >
-      Validate
+      Submit
     </v-btn>
 
     <v-btn
@@ -51,19 +37,13 @@
     >
       Reset Form
     </v-btn>
-
-    <v-btn
-      color="warning"
-      @click="resetValidation"
-    >
-      Reset Validation
-    </v-btn>
   </v-form>
   </section>
 </template>
 
 <script>
 export default {
+  layout: 'empty',
   data: () => ({
       valid: true,
       name: '',
@@ -76,14 +56,6 @@ export default {
         v => !!v || 'E-mail is required',
         v => /.+@.+\..+/.test(v) || 'E-mail must be valid',
       ],
-      select: null,
-      items: [
-        'Item 1',
-        'Item 2',
-        'Item 3',
-        'Item 4',
-      ],
-      checkbox: false,
     }),
 
     methods: {
@@ -93,9 +65,13 @@ export default {
       reset () {
         this.$refs.form.reset()
       },
-      resetValidation () {
-        this.$refs.form.resetValidation()
-      },
-    },
+    }
 }
 </script>
+
+<style>
+.page__login {
+  max-width: 400px;
+  margin: auto;
+}
+</style>

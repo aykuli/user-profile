@@ -1,7 +1,14 @@
 <template>
-  <v-app>
+  <v-app class="page__error">
     <h1 v-if="error.statusCode === 404">
-      {{ pageNotFound }}
+      <v-alert
+      dense
+      outlined
+      type="error"
+    >
+       {{ pageNotFound }}
+    </v-alert>
+
     </h1>
     <h1 v-else>
       {{ otherError }}
@@ -40,5 +47,9 @@ export default {
 <style scoped>
 h1 {
   font-size: 20px;
+}
+
+.page__error {
+ margin-top: 50px;
 }
 </style>
