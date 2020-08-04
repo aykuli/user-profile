@@ -3,24 +3,21 @@
     <v-navigation-drawer
       v-model="drawer"
       :mini-variant="miniVariant"
-      :clipped="clipped"
-      fixed
       app
       color="lime accent-1"
     >
       <v-list>
         <v-list-item
-          v-for="(item, i) in items"
-          :key="i"
-          :to="item.to"
+          :to="'profile'"
           router
           exact
+          v-if="!hasToken"
         >
           <v-list-item-action>
-            <v-icon>{{ item.icon }}</v-icon>
+            <v-icon>mdi-account</v-icon>
           </v-list-item-action>
           <v-list-item-content>
-            <v-list-item-title v-text="item.title" />
+            Profile
           </v-list-item-content>
         </v-list-item>
 
@@ -31,7 +28,7 @@
           v-if="!hasToken"
         >
           <v-list-item-action>
-            <v-icon>mdi-account</v-icon>
+            <v-icon>mdi-door</v-icon>
           </v-list-item-action>
           <v-list-item-content>
             Login
@@ -48,7 +45,6 @@
           </v-list-item-action>
           <v-list-item-content>
             Logout
-            hasToken {{hasToken}}
           </v-list-item-content>
         </v-list-item>
       </v-list>
@@ -59,7 +55,6 @@
       app
       color="lime accent-1"
     >
-      <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
       <v-btn
         icon
         @click.stop="miniVariant = !miniVariant"
@@ -67,25 +62,12 @@
         <v-icon>mdi-{{ `chevron-${miniVariant ? 'right' : 'left'}` }}</v-icon>
       </v-btn>
       <v-spacer />
-      <v-btn
-        icon
-        @click.stop="rightDrawer = !rightDrawer"
-      >
-        <v-icon>mdi-menu</v-icon>
-      </v-btn>
     </v-app-bar>
     <v-main>
       <v-container>
         <nuxt />
       </v-container>
     </v-main>
-    <v-navigation-drawer
-      v-model="rightDrawer"
-      :right="right"
-      temporary
-      fixed
-    >
-    </v-navigation-drawer>
   </div>
 </template>
 
@@ -93,23 +75,8 @@
 >
 export default {
   data: () => ({
-    clipped: false,
-    drawer: false,
-    items: [
-      {
-        icon: 'mdi-apps',
-        title: 'Welcome',
-        to: '/'
-      },
-      {
-        icon: 'mdi-refresh',
-        title: 'Users',
-        to: '/users'
-      }
-    ],
+    drawer: true,
     miniVariant: false,
-    right: true,
-    rightDrawer: false,
   }),
   computed: {
     hasToken() {

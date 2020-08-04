@@ -1,14 +1,12 @@
 <template>
-  <div class="index">
-    hello
+  <div>
+    Main page
   </div>
 </template>
 
 <script>
+export default {
+  middleware: ['auth']
+}
 </script>
 
-<style>
-.index {
-  border: 1px dotted blue;
-}
-</style>
