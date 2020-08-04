@@ -1,56 +1,50 @@
 <template>
-  <v-container fluid>
-    <v-navigation-drawer
-      :width="width"
-      :value="true"
-      stateless
-    >
-      <v-img
-        :src="user.photo"
-        :lazy-src="user.lazyPhoto"
-        aspect-ratio="1.7" contain class="profile__img"></v-img>
+  <div>
+    <v-container fluid>
+      <v-card
+        class="mx-auto"
+        :width="width"
+      >
+        <v-img
+          v-if="state.user"
+          :width="width"
+          :src="state.user.photo"
+          :lazy-src="state.user.lazyPhoto"
+          aspect-ratio="1.7"
+          contain></v-img>
 
+        <v-list>
+          <v-list-item>
+            <v-list-item-action>
+              <v-icon>mdi-account</v-icon>
+            </v-list-item-action>
+            <v-list-item-title>{{ state.user.name ? state.user.name : 'There is no user name' }}</v-list-item-title>
+          </v-list-item>
 
-      <v-list>
-        <v-list-item :key="user.name">
-          <v-list-item-action>
-            <v-icon>mdi-account</v-icon>
-          </v-list-item-action>
-          <v-list-item-title>{{ user.name }}</v-list-item-title>
-        </v-list-item>
-
-        <v-divider :inset="inset"></v-divider>
-
-        <v-list-item :key="user.email">
-          <v-list-item-action>
-            <v-icon>mdi-email</v-icon>
-          </v-list-item-action>
-          <v-list-item-title>{{ user.email }}</v-list-item-title>
-        </v-list-item>
-
-        <v-divider :inset="inset"></v-divider>
-      </v-list>
-    </v-navigation-drawer>
-  </v-container>
+          <v-list-item>
+            <v-list-item-action>
+              <v-icon>mdi-email</v-icon>
+            </v-list-item-action>
+            <v-list-item-title>{{ state.user.email ? state.user.email : 'There is no user email' }}</v-list-item-title>
+          </v-list-item>
+        </v-list>
+      </v-card>
+    </v-container>
+  </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+
 export default {
   data: () => ({
-    width: 400,
-    user: {
-      id: '45',
-      name: 'name',
-      email: 'email',
-      photo: 'https://picsum.photos/id/11/250/250',
-      lazyPhoto: 'https://picsum.photos/id/11/60/60'
-    }
-  })
+    width: 400
+  }),
+  computed: {
+    ...mapGetters({
+      state: 'getState'
+    })
+  },
+  middleware: ['auth']
 }
 </script>
-
-<style>
-.profile__img {
-  max-width: 250px;
-}
-</style>

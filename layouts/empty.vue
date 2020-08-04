@@ -4,7 +4,7 @@
   </v-app>
 </template>
 
-<style>
+<style scoped>
 .page__empty {
   display: flex;
   justify-content: center;

@@ -50,6 +50,6 @@ h1 {
 }
 
 .page__error {
- margin-top: 50px;
+  margin-top: 50px;
 }
 </style>
